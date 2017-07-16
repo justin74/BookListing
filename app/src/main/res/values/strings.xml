@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BookList</string>
+    <string name="default_book_name">Unknown book name</string>
+    <string name="default_author">Unknown author</string>
+    <string name="search_hint">Search book</string>
+    <string name="empty_view_hint">Please click search icon for search books.</string>
+</resources>
