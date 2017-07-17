@@ -24,9 +24,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
@@ -140,7 +142,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected ArrayList<Book> doInBackground(String... strings) {
             // Create URL object
-            URL url = createUrl(GOOGLE_BOOK_API + strings[0]);
+            URL url = null;
+            try {
+                url = createUrl(GOOGLE_BOOK_API + URLEncoder.encode(strings[0], "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                Log.e(LOG_TAG, "UnsupportedEncodingException");
+            }
 
             // Perform HTTP request to the URL and receive a JSON response back
             String jsonResponse = "";
@@ -246,22 +253,22 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             JSONObject baseJsonResponse = new JSONObject(bookJSON);
-            JSONArray itemsArray = baseJsonResponse.getJSONArray("items");
+            JSONArray itemsArray = baseJsonResponse.getJSONArray(Constant.JSONKey.items);
 
             //If there are results in the items array
             for (int i = 0; i < itemsArray.length(); i++) {
                 JSONObject itemJSONObject = itemsArray.getJSONObject(i);
-                JSONObject volumeInfo = itemJSONObject.getJSONObject("volumeInfo");
+                JSONObject volumeInfo = itemJSONObject.getJSONObject(Constant.JSONKey.volumeInfo);
 
                 //Get book title.
-                String title = volumeInfo.getString("title");
+                String title = volumeInfo.getString(Constant.JSONKey.title);
 
                 //Get book authors.
                 String authors = "";
-                if (volumeInfo.isNull("authors")) {
+                if (volumeInfo.isNull(Constant.JSONKey.authors)) {
                     authors = getString(R.string.default_author);
                 } else {
-                    JSONArray authorsArray = volumeInfo.getJSONArray("authors");
+                    JSONArray authorsArray = volumeInfo.getJSONArray(Constant.JSONKey.authors);
                     for (int authorsCount = 0; authorsCount < authorsArray.length(); authorsCount++) {
                         if (authorsCount == authorsArray.length() - 1) {
                             authors = authors + authorsArray.getString(authorsCount);
