@@ -38,10 +38,6 @@ public class MainActivity extends AppCompatActivity {
      * Tag for the log messages
      */
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private static final String GOOGLE_BOOK_API =
-            "https://www.googleapis.com/books/v1/volumes?maxResults=40&q=";
-    private static final String BOOKS_LIST_STATE = "book list state";
-
     private TextView emptyListTextView;
     private ListView listView;
     private ProgressBar progressBar;
@@ -54,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
         initView();
 
         if (savedInstanceState != null) {
-            mBookArrayList = savedInstanceState.getParcelableArrayList(BOOKS_LIST_STATE);
+            mBookArrayList = savedInstanceState.
+                    getParcelableArrayList(Constant.JSONKey.BOOKS_LIST_STATE);
             if (mBookArrayList != null) {
                 Log.d(LOG_TAG, "mBookArrayList = " + mBookArrayList.size());
                 updateUI();
@@ -74,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList(BOOKS_LIST_STATE, mBookArrayList);
+        outState.putParcelableArrayList(Constant.JSONKey.BOOKS_LIST_STATE, mBookArrayList);
         super.onSaveInstanceState(outState);
     }
 
@@ -144,7 +141,8 @@ public class MainActivity extends AppCompatActivity {
             // Create URL object
             URL url = null;
             try {
-                url = createUrl(GOOGLE_BOOK_API + URLEncoder.encode(strings[0], "UTF-8"));
+                url = createUrl(Constant.JSONKey.GOOGLE_BOOK_API +
+                        URLEncoder.encode(strings[0], "UTF-8"));
             } catch (UnsupportedEncodingException e) {
                 Log.e(LOG_TAG, "UnsupportedEncodingException");
             }
