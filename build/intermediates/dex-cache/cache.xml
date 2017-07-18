@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/apple/Desktop/github/BookListing/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fe14ffeced70a545c1aa1388dfa9c069c4b89a80">
+        <dex dex="/Users/apple/Desktop/github/BookListing/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_e328a9c90c5da0cddfdee6d77a61440a57bfede7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/Desktop/github/BookListing/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/apple/Desktop/github/BookListing/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_c2a30e6e51b67ed510eb3e127b297ccfebeec92d/classes.dex" />
+    </item>
+
+</items>
